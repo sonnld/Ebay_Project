@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS\\source\\repos\\Ebay_Project_PRN\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj": {}
+    "C:\\Users\\ASUS\\Source\\Repos\\sonnld\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS\\source\\repos\\Ebay_Project_PRN\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj": {
+    "C:\\Users\\ASUS\\Source\\Repos\\sonnld\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Ebay_Project_PRN\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Source\\Repos\\sonnld\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
         "projectName": "Ebay_Project_PRN",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\Ebay_Project_PRN\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
+        "projectPath": "C:\\Users\\ASUS\\Source\\Repos\\sonnld\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\Ebay_Project_PRN\\Ebay_Project_PRN\\obj\\",
+        "outputPath": "C:\\Users\\ASUS\\Source\\Repos\\sonnld\\Ebay_Project\\Ebay_Project_PRN\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
