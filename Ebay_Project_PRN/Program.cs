@@ -1,3 +1,8 @@
+using Ebay_Project_PRN.Models;
+using Ebay_Project_PRN.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+
 namespace Ebay_Project_PRN
 {
     public class Program
@@ -8,6 +13,14 @@ namespace Ebay_Project_PRN
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+                        builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+                            .AddRoles<IdentityRole>()
+                            .AddEntityFrameworkStores<ApplicationDbContext>();
 
             var app = builder.Build();
 
@@ -23,6 +36,7 @@ namespace Ebay_Project_PRN
             app.UseStaticFiles();
 
             app.UseRouting();
+                        app.UseAuthentication();;
 
             app.UseAuthorization();
 

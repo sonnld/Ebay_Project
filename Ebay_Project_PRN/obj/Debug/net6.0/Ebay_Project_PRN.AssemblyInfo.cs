@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ebay_Project_PRN")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74bfb2c6f81f1bb9909ef1f28c580e314d1e2bf0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f0a7b914a8b5eb20f56e8fb7cd66dff58611389c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ebay_Project_PRN")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ebay_Project_PRN")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
