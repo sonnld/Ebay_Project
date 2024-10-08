@@ -1,4 +1,4 @@
-using Ebay_Project_PRN.Models;
+using Ebay_Project_PRN.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +9,10 @@ namespace Ebay_Project_PRN.Pages
     [Authorize]
     public class UserModel : PageModel
     {
-        private readonly UserManager<User> userManager;
-        public User? appUser;
+        private readonly UserManager<AspNetUser> userManager;
+        public AspNetUser? appUser;
 
-        public UserModel(UserManager<User> userManager)
+        public UserModel(UserManager<AspNetUser> userManager)
         {
             this.userManager = userManager;
         }
