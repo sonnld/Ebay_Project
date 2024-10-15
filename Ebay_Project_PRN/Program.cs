@@ -1,6 +1,8 @@
-﻿using Ebay_Project_PRN.Model;
+using Ebay_Project_PRN.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Ebay_Project_PRN.Helper;
 
 namespace Ebay_Project_PRN
 {
@@ -21,7 +23,9 @@ namespace Ebay_Project_PRN
                             .AddRoles<IdentityRole>()
                             .AddEntityFrameworkStores<EBay_ProjectContext>();
 
-            var app = builder.Build();
+			builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+			builder.Services.AddTransient<IEmailSender, EmailSender>();
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -35,7 +39,7 @@ namespace Ebay_Project_PRN
             app.UseStaticFiles();
 
             app.UseRouting();
-                        app.UseAuthentication();;
+	        app.UseAuthentication();;
 
             app.UseAuthorization();
 
