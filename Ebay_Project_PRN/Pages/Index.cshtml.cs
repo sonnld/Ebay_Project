@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Ebay_Project_PRN.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ebay_Project_PRN.Pages
 {
@@ -7,14 +9,18 @@ namespace Ebay_Project_PRN.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        private readonly EBay_ProjectContext _context;
+
+        public IndexModel(EBay_ProjectContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public void OnGet()
-        {
+        public List<Store> Stores { get; set; }
 
+        public async Task OnGetAsync()
+        {
+            Stores = await _context.Stores.ToListAsync();
         }
     }
 }
