@@ -1,0 +1,144 @@
+﻿@page
+@model Ebay_Project_PRN.Pages.ManageProductModel
+@{
+    ViewData["Title"] = "Manage Products";
+}
+<h2>Manage Products</h2>
+
+<!-- Form to Search Products -->
+<form method="get" style="display: flex; justify-content: flex-end; align-items: center;">
+    <div style="margin-bottom: 15px; display: flex; align-items: center;">
+        <input type="text" name="searchQuery" placeholder="Enter category name" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; margin-right: 10px;" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<!-- Form to Add New Product -->
+<form method="post" enctype="multipart/form-data" style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h3 style="color: #4a90e2; font-weight: bold;">Add New Product</h3>
+    <div style="margin-bottom: 15px;">
+        <label asp-for="Product.ProductName" style="font-weight: bold;">Product Name</label>
+        <input asp-for="Product.ProductName" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <span asp-validation-for="Product.ProductName" style="color: red;"></span>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label asp-for="Product.Price" style="font-weight: bold;">Price</label>
+        <input asp-for="Product.Price" type="number" step="0.01" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <span asp-validation-for="Product.Price" style="color: red;"></span>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label asp-for="Product.StockQuantity" style="font-weight: bold;">Stock Quantity</label>
+        <input asp-for="Product.StockQuantity" type="number" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+        <span asp-validation-for="Product.StockQuantity" style="color: red;"></span>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label asp-for="Product.Description" style="font-weight: bold;">Description</label>
+        <textarea asp-for="Product.Description" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+        <span asp-validation-for="Product.Description" style="color: red;"></span>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="ProductImages" style="font-weight: bold;">Product Images</label>
+        <input type="file" name="ProductImages" multiple accept="image/*" style="width: 100%;" />
+        <span style="color: red;">Upload images (optional)</span>
+    </div>
+    <button type="submit" formaction="@Url.Page("ManageProducts", "Create")" style="background-color: #4a90e2; color: white; padding: 10px 20px; border: none; border-radius: 4px;">Add Product</button>
+</form>
+
+<!-- Product List -->
+<h3>Product List</h3>
+<div class="row">
+    @if (Model.Products != null && Model.Products.Any())
+    {
+        foreach (var product in Model.Products)
+        {
+            <div class="col-md-3" style="margin-bottom: 20px;">
+                <div class="card">
+                    <img src="@product.ProductImages.FirstOrDefault()?.ImageUrl" class="card-img-top" alt="@product.ProductName" style="height: 200px; object-fit: cover;" />
+                    <div class="card-body">
+                        <h5 class="card-title">@product.ProductName</h5>
+                        <p class="card-text">Price: @product.Price.ToString("C")</p>
+                        <p class="card-text">Stock: @product.StockQuantity</p>
+                        <p class="card-text">Status: @(product.IsActive ?? false ? "Visible" : "Hidden")</p>
+                        <form method="post">
+                            <input type="hidden" name="productId" value="@product.ProductId" />
+                            <button type="submit" class="btn btn-warning" formaction="@Url.Page("ManageProducts", "ToggleActive")">
+                                @(product.IsActive ?? false ? "Hide" : "Show")
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal"
+                                    data-id="@product.ProductId" data-name="@product.ProductName" data-price="@product.Price"
+                                    data-stock="@product.StockQuantity" data-description="@product.Description">
+                                Edit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-md-12">No products available.</div>
+    }
+</div>
+
+<!-- Bootstrap Modal for Editing Products -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #f2f2f2;">
+                <h5 class="modal-title" id="editModalLabel" style="font-weight: bold; color: #4a90e2;">Edit Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="editProductId" name="ProductId" />
+                    <div class="form-group">
+                        <label for="editProductName" style="font-weight: bold;">Product Name</label>
+                        <input type="text" class="form-control" id="editProductName" name="ProductName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductPrice" style="font-weight: bold;">Price</label>
+                        <input type="number" class="form-control" id="editProductPrice" name="Price" step="0.01" />
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductStock" style="font-weight: bold;">Stock Quantity</label>
+                        <input type="number" class="form-control" id="editProductStock" name="StockQuantity" />
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductDescription" style="font-weight: bold;">Description</label>
+                        <textarea class="form-control" id="editProductDescription" name="Description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" form="editProductForm" class="btn btn-primary" formaction="@Url.Page("ManageProducts", "Update")">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Script to populate modal with product data -->
+<script>
+    $('#editModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var productId = button.data('id');
+        var productName = button.data('name');
+        var productPrice = button.data('price');
+        var productStock = button.data('stock');
+        var productDescription = button.data('description');
+
+        var modal = $(this);
+        modal.find('#editProductId').val(productId);
+        modal.find('#editProductName').val(productName);
+        modal.find('#editProductPrice').val(productPrice);
+        modal.find('#editProductStock').val(productStock);
+        modal.find('#editProductDescription').val(productDescription);
+    });
+</script>
