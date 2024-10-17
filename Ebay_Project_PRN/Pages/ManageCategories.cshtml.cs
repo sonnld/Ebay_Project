@@ -1,4 +1,5 @@
 ﻿using Ebay_Project_PRN.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -8,15 +9,17 @@ namespace Ebay_Project_PRN.Pages
     public class ManageCategoriesModel : PageModel
     {
         private readonly EBay_ProjectContext _context;
+        private readonly UserManager<AspNetUser> _userManager;
         [BindProperty]
         public Category Category { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SearchQuery { get; set; }
 
-        public ManageCategoriesModel(EBay_ProjectContext context)
+        public ManageCategoriesModel(UserManager<AspNetUser> userManager, EBay_ProjectContext context)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public List<Category> Categories { get; set; } = new List<Category>();
@@ -44,11 +47,20 @@ namespace Ebay_Project_PRN.Pages
         // OnPostCreate - Thêm Category mới
         public async Task<IActionResult> OnPostCreate(Category category)
         {
-            if (!ModelState.IsValid)
+           
+            // Retrieve the currently logged-in user
+            var user = await _userManager.GetUserAsync(User);
+
+            // Find the store associated with the logged-in user
+            var store = await _context.Stores.FirstOrDefaultAsync(s => s.OwnerId == user.Id);
+
+            if (store == null)
             {
+                // If the user does not have an associated store, return an error
+                ModelState.AddModelError(string.Empty, "No store found for the logged-in user.");
                 return Page();
             }
-
+            category.StoreId = store.StoreId;
             category.IsActive = true; // Danh mục mặc định là hoạt động
             category.CreatedAt = DateTime.Now;
             _context.Categories.Add(category);
@@ -60,14 +72,23 @@ namespace Ebay_Project_PRN.Pages
         // OnPostUpdate - Cập nhật thông tin Category
         public async Task<IActionResult> OnPostUpdate(Category category)
         {
-            if (!ModelState.IsValid)
+            // Retrieve the currently logged-in user
+            var user = await _userManager.GetUserAsync(User);
+
+            // Find the store associated with the logged-in user
+            var store = await _context.Stores.FirstOrDefaultAsync(s => s.OwnerId == user.Id);
+
+            if (store == null)
             {
+                // If the user does not have an associated store, return an error
+                ModelState.AddModelError(string.Empty, "No store found for the logged-in user.");
                 return Page();
             }
-
+            
             var existingCategory = await _context.Categories.FindAsync(category.CategoryId);
             if (existingCategory != null)
             {
+                category.CategoryId = existingCategory.CategoryId;
                 existingCategory.CategoryName = category.CategoryName;
                 existingCategory.Description = category.Description;
                 existingCategory.UpdatedAt = DateTime.Now;
