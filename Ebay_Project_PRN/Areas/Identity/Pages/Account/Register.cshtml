@@ -69,6 +69,20 @@
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Role</label>
+                        <div class="col-sm-8 d-flex align-items-center">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input custom-radio" type="radio" asp-for="Input.Role" value="Seller" id="sellerRole" required>
+                                <label class="form-check-label" for="sellerRole">Seller</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input custom-radio" type="radio" asp-for="Input.Role" value="Client" id="clientRole" required>
+                                <label class="form-check-label" for="clientRole">Client</label>
+                            </div>
+                            <span asp-validation-for="Input.Role" class="text-danger"></span>
+                        </div>
+                    </div>
 
                     <div class="row mb-3">
                         <div class="offset-sm-4 col-sm-4 d-grid">
