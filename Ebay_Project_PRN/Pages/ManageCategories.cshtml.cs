@@ -48,9 +48,24 @@ namespace Ebay_Project_PRN.Pages
             {
                 return Page();
             }
+            var userName = User.Identity.Name;
+            var user = await _context.AspNetUsers.FirstOrDefaultAsync(u => u.UserName == userName);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "User not found.");
+                return Page();
+            }
+            var store = await _context.Stores.FirstOrDefaultAsync(s => s.OwnerId == user.Id);
+
+            if (store == null)
+            {
+                ModelState.AddModelError(string.Empty, "No store found for the logged-in user.");
+                return Page();
+            }
 
             category.IsActive = true; // Danh mục mặc định là hoạt động
             category.CreatedAt = DateTime.Now;
+            category.StoreId = store.StoreId;
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
