@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ebay_Project_PRN")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+76a860268d3de41ad8ebe57a42e890f7b67e8251")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d75463a516c1489c72807b2618527000144a68bf")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ebay_Project_PRN")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ebay_Project_PRN")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

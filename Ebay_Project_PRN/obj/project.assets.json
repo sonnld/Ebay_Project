@@ -11088,11 +11088,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\vscode2022\\EBay\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
+      "projectUniqueName": "D:\\vscode2022\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
       "projectName": "Ebay_Project_PRN",
-      "projectPath": "D:\\vscode2022\\EBay\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
+      "projectPath": "D:\\vscode2022\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
       "packagesPath": "C:\\Users\\anhng\\.nuget\\packages\\",
-      "outputPath": "D:\\vscode2022\\EBay\\Ebay_Project\\Ebay_Project_PRN\\obj\\",
+      "outputPath": "D:\\vscode2022\\Ebay_Project\\Ebay_Project_PRN\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\anhng\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11170,13 +11170,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\vscode2022\\EBay\\Ebay_Project\\Ebay_Project_PRN\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

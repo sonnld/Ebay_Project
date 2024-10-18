@@ -27,19 +27,30 @@ namespace Ebay_Project_PRN.Pages
         // OnGetAsync - Hiển thị danh sách Category
         public async Task OnGetAsync()
         {
-            Categories = await _context.Categories.ToListAsync();
+            var user = await _userManager.GetUserAsync(User);
 
+            // Find the store associated with the logged-in user
+            var store = await _context.Stores.FirstOrDefaultAsync(s => s.OwnerId == user.Id);
+
+            if (store == null)
+            {
+                // If the user does not have an associated store, return an empty list
+                Categories = new List<Category>();
+                return;
+            }
+
+            // Fetch categories associated with the store
+            IQueryable<Category> query = _context.Categories
+                .Where(c => c.StoreId == store.StoreId);
+
+            // If a search query is provided, filter categories based on the search query
             if (!string.IsNullOrEmpty(SearchQuery))
             {
-                Categories = _context.Categories
-                    .Where(c => c.CategoryName.Contains(SearchQuery))
-                    .ToList();
+                query = query.Where(c => c.CategoryName.Contains(SearchQuery));
             }
-            else
-            {
-                // Nếu không có từ khóa thì lấy toàn bộ danh mục
-                Categories = _context.Categories.ToList();
-            }
+
+            // Execute the query and convert to a list
+            Categories = await query.ToListAsync();
         }
 
       
