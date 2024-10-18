@@ -95,6 +95,9 @@ namespace Ebay_Project_PRN.Areas.Identity.Pages.Account
             [Required]
             public string Address { get; set; }
 
+            [Required]
+            public string Role { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -126,6 +129,7 @@ namespace Ebay_Project_PRN.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = new AspNetUser()
@@ -139,15 +143,22 @@ namespace Ebay_Project_PRN.Areas.Identity.Pages.Account
                     CreatedAt = DateTime.Now
                 };
 
-
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    //set role
-                    await _userManager.AddToRoleAsync(user, "client");
+                    // Đặt role dựa trên lựa chọn của người dùng (Input.Role)
+                    if (!string.IsNullOrEmpty(Input.Role))
+                    {
+                        await _userManager.AddToRoleAsync(user, Input.Role);
+                    }
+                    else
+                    {
+                        // Nếu role không có giá trị, có thể mặc định là "Client"
+                        await _userManager.AddToRoleAsync(user, "Client");
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -171,6 +182,7 @@ namespace Ebay_Project_PRN.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -180,6 +192,7 @@ namespace Ebay_Project_PRN.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
 
         private AspNetUser CreateUser()
         {

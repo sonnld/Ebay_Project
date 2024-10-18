@@ -11083,19 +11083,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
+    "C:\\Users\\anhng\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS\\Source\\Repos\\sonnld\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
+      "projectUniqueName": "D:\\vscode2022\\EBay\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
       "projectName": "Ebay_Project_PRN",
-      "projectPath": "C:\\Users\\ASUS\\Source\\Repos\\sonnld\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
-      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\Source\\Repos\\sonnld\\Ebay_Project\\Ebay_Project_PRN\\obj\\",
+      "projectPath": "D:\\vscode2022\\EBay\\Ebay_Project\\Ebay_Project_PRN\\Ebay_Project_PRN.csproj",
+      "packagesPath": "C:\\Users\\anhng\\.nuget\\packages\\",
+      "outputPath": "D:\\vscode2022\\EBay\\Ebay_Project\\Ebay_Project_PRN\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\anhng\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11103,7 +11103,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11116,11 +11115,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -11173,8 +11167,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\vscode2022\\EBay\\Ebay_Project\\Ebay_Project_PRN\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
